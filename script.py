@@ -6,7 +6,8 @@ from datetime import datetime
 import time
 
 # Configuration
-LOG_FILE = "stretch_log.csv"
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+LOG_FILE = os.path.join(SCRIPT_DIR, "stretch_log.csv")
 REMINDER_INTERVAL_SECONDS = 30 * 60  # 30 minutes
 
 def log_stretch():
@@ -17,11 +18,11 @@ def log_stretch():
         writer = csv.writer(f)
         # Write header if file is new
         if not file_exists:
-            writer.writerow(["Timestamp"])
+            writer.writerow(["Timestamp", "Method"])
         
         # Log current time
         now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        writer.writerow([now])
+        writer.writerow([now, "Automatic"])
         print(f"Logged stretch at: {now}")
 
 def show_reminder():
