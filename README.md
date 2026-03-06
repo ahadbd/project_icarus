@@ -4,32 +4,33 @@ This project is a **Persistent Health Tracking System** built using the **Gemini
 
 ## Overview
 
-The system consists of two main components:
+The system is now a unified application:
 
--   **`script.py`**: The background worker (The "Producer"). It triggers a `tkinter` popup reminder every 30 minutes to encourage stretching and logs your activity.
--   **`dashboard.py`**: The data visualizer (The "Wow" factor). It uses `matplotlib` to read the activity logs and display a bar chart of your daily progress.
+-   **`dashboard.py`**: The **Unified GUI**. It provides a single interface to:
+    -   **Start/Stop** the background monitoring.
+    -   **Adjust** the reminder interval (in minutes).
+    -   **Manually log** a stretch.
+    -   **Visualize** your stretch history with an embedded bar chart.
+
+-   **`script.py`**: (Legacy) Original standalone background worker.
 
 ## How to Run
 
 To run the **Project Icarus: The Antigravity Health Monitor**, follow these steps:
 
 ### 1. Install Dependencies
-Ensure you have `matplotlib` installed for the dashboard:
+Ensure you have `matplotlib` installed:
 ```bash
 pip install matplotlib
 ```
 
-### 2. Start the Health Reminder
-Run the background worker to receive stretch reminders every 30 minutes:
-```bash
-python "script.py"
-```
-*   A popup will appear every 30 minutes. 
-*   Click **'OK'** to log your stretch into `stretch_log.csv`.
-
-### 3. View the Dashboard
-To see your progress visualized in a bar chart, run the visualizer:
+### 2. Start the Unified App
+Run the dashboard to manage your health monitoring:
 ```bash
 python "dashboard.py"
 ```
-*Note: The dashboard will only display data after you have clicked 'OK' on at least one reminder.*
+
+### 3. Usage
+-   **Enter an interval** (e.g., 30) and click **"Start Monitor"** to begin receiving stretch reminders.
+-   Click **"Manual Log"** if you've done a stretch outside of the scheduled reminders.
+-   The chart will refresh automatically whenever a stretch is logged.
