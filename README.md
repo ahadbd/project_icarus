@@ -1,36 +1,68 @@
 # Project Icarus: The Antigravity Health Monitor
 
-This project is a **Persistent Health Tracking System** built using the **Gemini CLI**.
+![Version](https://img.shields.io/badge/version-2.0-blue.svg)
+![Status](https://img.shields.io/badge/status-active-success.svg)
 
-## Overview
+> "Gravity is a habit that is hard to shake. Shake it anyway."
 
-The system is now a unified application:
+**Project Icarus** is a Python-based health monitor designed for developers and desk workers. It reminds you to stretch, tracks your progress, and gamifies your health to keep you flying high.
 
--   **`dashboard.py`**: The **Unified GUI**. It provides a single interface to:
-    -   **Start/Stop** the background monitoring.
-    -   **Adjust** the reminder interval (in minutes).
-    -   **Manually log** a stretch.
-    -   **Visualize** your stretch history with an embedded bar chart.
+## 🚀 Features (v2.0)
 
--   **`script.py`**: (Legacy) Original standalone background worker.
+### 🎮 Gamified Health
+*   **XP & Leveling System:** Earn XP for every stretch. Rank up from "Cadet" to "Galactic Legend".
+*   **Streak Tracking:** Keep your momentum going by stretching daily.
+*   **Pilot Profile:** Visual dashboard of your current rank and progress.
 
-## How to Run
+### 🧘 Smart Reminders
+*   **Variety:** Instead of a generic alert, Icarus suggests specific exercises (e.g., "Neck Release", "Wrist Flexor").
+*   **Quiet Hours:** Configure start and end times to prevent interruptions during sleep.
+*   **Audio Feedback:** Optional sound notifications when a reminder is triggered.
 
-To run the **Project Icarus: The Antigravity Health Monitor**, follow these steps:
+### 📊 Mission Control (Dashboard)
+*   **Dark Mode UI:** A sleek, Nord-theme inspired interface easy on the eyes.
+*   **Activity Charts:** Visual bar charts of your daily stretching habits.
+*   **Exercise Library:** Built-in reference guide for all recommended exercises.
+*   **Manual Logging:** Forgot to click the popup? Log stretches manually.
 
-### 1. Install Dependencies
-Ensure you have `matplotlib` installed:
-```bash
-pip install matplotlib
-```
+## 🛠 Installation
 
-### 2. Start the Unified App
-Run the dashboard to manage your health monitoring:
-```bash
-python "dashboard.py"
-```
+1.  **Clone the Repository:**
+    ```bash
+    git clone https://github.com/yourusername/project-icarus.git
+    cd project-icarus
+    ```
 
-### 3. Usage
--   **Enter an interval** (e.g., 30) and click **"Start Monitor"** to begin receiving stretch reminders.
--   Click **"Manual Log"** if you've done a stretch outside of the scheduled reminders.
--   The chart will refresh automatically whenever a stretch is logged.
+2.  **Install Dependencies:**
+    Project Icarus requires `matplotlib` for charts and `tkinter` (usually built-in) for the GUI.
+    ```bash
+    pip install matplotlib
+    ```
+
+## 🕹 Usage
+
+1.  **Launch the Command Center:**
+    ```bash
+    python dashboard.py
+    ```
+2.  **Engage Systems:**
+    *   Click **"Engage Monitor"** to start the background timer (default: 30 mins).
+    *   The app will run in the background.
+    *   When the timer hits, a popup will appear with a recommended exercise.
+3.  **Customize:**
+    *   Go to the **"Settings"** tab to adjust the interval, quiet hours, or toggle sound.
+
+## 📂 File Structure
+
+*   `dashboard.py`: The main application entry point (GUI, Logic, Monitor).
+*   `icarus_data.py`: Data file containing exercise definitions, quotes, and XP logic.
+*   `stretch_log.csv`: Automatically generated log file storing your history.
+*   `script.py`: (Legacy) Minimalist headless script for background monitoring.
+
+## 🤝 Contributing
+
+Feel free to fork this project and submit PRs for new exercises, themes, or features!
+
+## 📜 License
+
+MIT License. Fly safe!
