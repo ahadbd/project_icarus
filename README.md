@@ -1,32 +1,33 @@
 # Project Icarus: The Antigravity Health Monitor
 
-![Version](https://img.shields.io/badge/version-2.1-blue.svg)
+![Version](https://img.shields.io/badge/version-3.0_PRO-red.svg)
 ![Status](https://img.shields.io/badge/status-active-success.svg)
 
-> "Gravity is a habit that is hard to shake. Shake it anyway."
+> "Gravity is a habit. Shake it off."
 
-**Project Icarus** is a Python-based health monitor designed for developers and desk workers. It reminds you to stretch, tracks your progress, and gamifies your health to keep you flying high.
+**Project Icarus PRO** is the ultimate health and productivity suite for developers. It combines smart health monitoring, gamification, and focus tools into a single, sleek desktop command center.
 
-## 🚀 Features (v2.1)
+## 🚀 Pro Features (v3.0)
 
-### 🎮 Gamified Health
-*   **XP Progress Bar:** Visualize your journey to the next rank with a dynamic progress bar.
-*   **XP & Leveling System:** Earn XP for every stretch. Rank up from "Cadet" to "Galactic Legend".
-*   **Streak Tracking:** Keep your momentum going with the daily 🔥 streak counter.
-*   **Pilot Profile:** A central hub showing your current rank, level, and experience.
+### 🍅 Pomodoro Focus Mode
+*   **Deep Work Cycles:** Integrated 25/5 Pomodoro timer to manage your focus sessions.
+*   **Automatic Breaks:** The system automatically triggers a stretch reminder the moment your focus session ends.
+*   **Custom Intervals:** Adjust your work and break times in the Settings tab.
 
-### 🧘 Smart & Interactive Reminders
-*   **⚡ Quick Stretch:** Feeling stiff? Trigger a random stretch instantly with one click.
-*   **Interactive Library:** Launch specific exercises directly from the library whenever you need them.
-*   **Variety:** Popups suggest specific exercises (e.g., "Neck Release", "Wrist Flexor") with motivational quotes.
-*   **Quiet Hours:** Set "Do Not Disturb" times (e.g., 22:00 to 08:00) to keep your nights peaceful.
-*   **Audio Feedback:** Gentle chimes when a reminder is triggered (optional).
+### 🏆 Achievement Hall
+*   **Mission Medals:** Unlock achievements like "Early Bird", "Night Owl", and "Iron Pilot".
+*   **Progress Tracking:** Visual indicators of your unlocked milestones.
+*   **Rank System:** Level up from a "Cadet" to a "Galactic Legend" by consistently logging stretches.
 
-### 📊 Mission Control (Dashboard)
-*   **Modern UI/UX:** A sleek, Nord-theme inspired interface with intuitive icons and refined spacing.
-*   **Activity Charts:** High-contrast bar charts visualize your daily stretching habits.
-*   **Exercise Library:** A comprehensive reference guide for all recommended desk exercises.
-*   **Manual Logging:** Easily log stretches you did away from your desk.
+### 📊 Advanced Analytics
+*   **Health Balance (Pie Chart):** Visualize which body parts you're stretching (Neck, Back, Eyes, etc.).
+*   **Activity History (Bar Chart):** Track your daily consistency over the last 7 days.
+*   **Smart Categorization:** Every stretch is categorized for detailed health insights.
+
+### ⚙️ Professional Systems
+*   **Persistent Settings:** Your interval, quiet hours, and audio preferences are now saved to `settings.json`.
+*   **Mission Logs:** Detailed CSV logging including timestamps, categories, and methods.
+*   **Quiet Hours:** Automated "Do Not Disturb" mode to keep your nights peaceful.
 
 ## 🛠 Installation
 
@@ -37,7 +38,6 @@
     ```
 
 2.  **Install Dependencies:**
-    Project Icarus requires `matplotlib` for charts and `tkinter` (usually built-in) for the GUI.
     ```bash
     pip install matplotlib
     ```
@@ -49,23 +49,23 @@
     python dashboard.py
     ```
 2.  **Engage Systems:**
-    *   Click **"▶ Engage Monitor"** to start the background timer.
-    *   The app runs in the background. When the timer hits, a popup appears.
-    *   Click **"✅ Mission Complete"** to log your progress and gain XP!
+    *   **📊 Mission Control:** View your pilot profile and health analytics.
+    *   **🍅 Pomodoro Focus:** Start a focus session to boost productivity.
+    *   **📚 Exercises:** Browse the library or launch a specific stretch instantly.
 3.  **Customize:**
-    *   Go to the **"⚙ Settings"** tab to adjust intervals, quiet hours, or toggle sounds.
+    *   Go to **⚙ Settings** to adjust your mission parameters and save your configuration.
 
 ## 📂 File Structure
 
-*   `dashboard.py`: The main "Mission Control" application (GUI & Monitor).
-*   `icarus_data.py`: Core logic for XP, levels, exercises, and motivational quotes.
-*   `stretch_log.csv`: Your personal mission log (History).
-*   `script.py`: (Legacy) Minimalist headless script for background monitoring.
+*   `dashboard.py`: The main Pro Command Center application.
+*   `icarus_data.py`: Core logic for XP, achievements, settings, and exercise data.
+*   `settings.json`: Your saved configuration file.
+*   `stretch_log.csv`: Your encrypted mission history.
 
 ## 🤝 Contributing
 
-Feel free to fork this project and submit PRs for new exercises, themes, or features!
+Feel free to fork this project and submit PRs for new exercises, themes, or mission medals!
 
 ## 📜 License
 
-MIT License. Fly safe!
+MIT License. Fly safe, Pilot!

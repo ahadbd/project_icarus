@@ -1,0 +1,4 @@
+__pycache__/
+stretch_log.csv
+settings.json
+*.pyc
