@@ -68,29 +68,33 @@ class HealthMonitorApp:
                              foreground=FG_COLOR, 
                              borderwidth=0, 
                              focuscolor=BUTTON_ACTIVE,
-                             font=("Segoe UI", 10, "bold"))
+                             font=("Segoe UI", 10, "bold"),
+                             padding=6)
         self.style.map("TButton", 
                        background=[('active', BUTTON_ACTIVE)], 
                        foreground=[('active', '#FFFFFF')])
         
-        self.style.configure("Header.TLabel", font=("Segoe UI", 18, "bold"), foreground=ACCENT_COLOR)
+        self.style.configure("Header.TLabel", font=("Segoe UI", 20, "bold"), foreground=ACCENT_COLOR)
         self.style.configure("SubHeader.TLabel", font=("Segoe UI", 14, "bold"), foreground=HIGHLIGHT_COLOR)
         self.style.configure("Status.TLabel", font=("Segoe UI", 10, "italic"))
         
         # Notebook (Tabs) Styling
         self.style.configure("TNotebook", background=BG_COLOR, borderwidth=0)
-        self.style.configure("TNotebook.Tab", background=BUTTON_BG, foreground=FG_COLOR, padding=[10, 5], font=("Segoe UI", 10))
+        self.style.configure("TNotebook.Tab", background=BUTTON_BG, foreground=FG_COLOR, padding=[15, 8], font=("Segoe UI", 10, "bold"))
         self.style.map("TNotebook.Tab", background=[("selected", ACCENT_COLOR)], foreground=[("selected", BG_COLOR)])
 
         self.style.configure("TLabelframe", background=BG_COLOR, bordercolor=BUTTON_BG)
         self.style.configure("TLabelframe.Label", background=BG_COLOR, foreground=ACCENT_COLOR, font=("Segoe UI", 11, "bold"))
 
+        # Progress Bar
+        self.style.configure("Horizontal.TProgressbar", background=SUCCESS_COLOR, troughcolor=BUTTON_BG, bordercolor=BG_COLOR, lightcolor=SUCCESS_COLOR, darkcolor=SUCCESS_COLOR)
+
     def setup_ui(self):
         # Header
-        header_frame = ttk.Frame(self.root, padding=(20, 20, 20, 0))
+        header_frame = ttk.Frame(self.root, padding=(25, 25, 25, 10))
         header_frame.pack(fill=tk.X)
         
-        ttk.Label(header_frame, text="PROJECT ICARUS", style="Header.TLabel").pack(side=tk.LEFT)
+        ttk.Label(header_frame, text="🚀 PROJECT ICARUS", style="Header.TLabel").pack(side=tk.LEFT)
         self.status_label = ttk.Label(header_frame, text="● Systems Offline", style="Status.TLabel", foreground=WARNING_COLOR)
         self.status_label.pack(side=tk.RIGHT)
 
@@ -100,59 +104,70 @@ class HealthMonitorApp:
 
         # --- TAB 1: DASHBOARD ---
         self.tab_dashboard = ttk.Frame(self.notebook)
-        self.notebook.add(self.tab_dashboard, text="Mission Control")
+        self.notebook.add(self.tab_dashboard, text="📊 Mission Control")
         self.setup_dashboard_tab()
 
         # --- TAB 2: LIBRARY ---
         self.tab_library = ttk.Frame(self.notebook)
-        self.notebook.add(self.tab_library, text="Exercise Library")
+        self.notebook.add(self.tab_library, text="📚 Exercise Library")
         self.setup_library_tab()
 
         # --- TAB 3: SETTINGS ---
         self.tab_settings = ttk.Frame(self.notebook)
-        self.notebook.add(self.tab_settings, text="Settings")
+        self.notebook.add(self.tab_settings, text="⚙ Settings")
         self.setup_settings_tab()
 
     def setup_dashboard_tab(self):
         # Top Section: Pilot Stats
-        stats_frame = ttk.LabelFrame(self.tab_dashboard, text="Pilot Profile", padding=15)
-        stats_frame.pack(fill=tk.X, pady=(10, 10))
+        stats_frame = ttk.LabelFrame(self.tab_dashboard, text="Pilot Profile", padding=20)
+        stats_frame.pack(fill=tk.X, pady=(10, 20))
 
         # Grid layout for stats
         stats_frame.columnconfigure(0, weight=1)
-        stats_frame.columnconfigure(1, weight=1)
+        stats_frame.columnconfigure(1, weight=2) # More space for XP bar
         stats_frame.columnconfigure(2, weight=1)
 
         # Level & Rank
         f1 = ttk.Frame(stats_frame)
-        f1.grid(row=0, column=0, sticky="ew")
-        ttk.Label(f1, text="RANK", font=("Segoe UI", 8)).pack(anchor="w")
+        f1.grid(row=0, column=0, sticky="ew", padx=10)
+        ttk.Label(f1, text="RANK", font=("Segoe UI", 8, "bold"), foreground=BUTTON_ACTIVE).pack(anchor="w")
         ttk.Label(f1, textvariable=self.rank_title, style="SubHeader.TLabel").pack(anchor="w")
         ttk.Label(f1, textvariable=self.current_level, font=("Segoe UI", 10)).pack(anchor="w")
 
         # XP Bar
         f2 = ttk.Frame(stats_frame)
-        f2.grid(row=0, column=1, sticky="ew")
-        ttk.Label(f2, text="EXPERIENCE", font=("Segoe UI", 8)).pack(anchor="w")
-        self.xp_label = ttk.Label(f2, text="0 / 100 XP", style="SubHeader.TLabel")
-        self.xp_label.pack(anchor="w")
+        f2.grid(row=0, column=1, sticky="ew", padx=20)
+        ttk.Label(f2, text="EXPERIENCE", font=("Segoe UI", 8, "bold"), foreground=BUTTON_ACTIVE).pack(anchor="w")
+        
+        self.xp_progress = ttk.Progressbar(f2, style="Horizontal.TProgressbar", mode="determinate", length=300)
+        self.xp_progress.pack(fill=tk.X, pady=(5, 5))
+        
+        self.xp_label = ttk.Label(f2, text="0 / 100 XP", font=("Segoe UI", 9))
+        self.xp_label.pack(anchor="e")
         
         # Streak
         f3 = ttk.Frame(stats_frame)
-        f3.grid(row=0, column=2, sticky="ew")
-        ttk.Label(f3, text="CURRENT STREAK", font=("Segoe UI", 8)).pack(anchor="e")
-        ttk.Label(f3, textvariable=self.streak, style="SubHeader.TLabel").pack(anchor="e")
+        f3.grid(row=0, column=2, sticky="ew", padx=10)
+        ttk.Label(f3, text="CURRENT STREAK", font=("Segoe UI", 8, "bold"), foreground=BUTTON_ACTIVE).pack(anchor="e")
+        
+        streak_container = ttk.Frame(f3)
+        streak_container.pack(anchor="e")
+        ttk.Label(streak_container, text="🔥 ", font=("Segoe UI", 14)).pack(side=tk.LEFT)
+        ttk.Label(streak_container, textvariable=self.streak, style="SubHeader.TLabel").pack(side=tk.LEFT)
+        
         ttk.Label(f3, text="Days", font=("Segoe UI", 10)).pack(anchor="e")
 
         # Controls
         control_frame = ttk.Frame(self.tab_dashboard)
         control_frame.pack(fill=tk.X, pady=10)
         
-        self.start_btn = ttk.Button(control_frame, text="Engage Monitor", command=self.toggle_monitor)
+        self.start_btn = ttk.Button(control_frame, text="▶ Engage Monitor", command=self.toggle_monitor)
         self.start_btn.pack(side=tk.LEFT, padx=5)
 
-        ttk.Button(control_frame, text="Log Manual Stretch", command=self.manual_log).pack(side=tk.LEFT, padx=5)
-        ttk.Button(control_frame, text="Refresh Intel", command=self.load_data).pack(side=tk.RIGHT, padx=5)
+        ttk.Button(control_frame, text="⚡ Quick Stretch", command=self.trigger_reminder).pack(side=tk.LEFT, padx=5)
+        ttk.Button(control_frame, text="✍ Log Manual", command=self.manual_log).pack(side=tk.LEFT, padx=5)
+        
+        ttk.Button(control_frame, text="🔄 Refresh", command=self.load_data).pack(side=tk.RIGHT, padx=5)
 
         # Chart Area
         self.chart_frame = ttk.Frame(self.tab_dashboard)
@@ -179,24 +194,37 @@ class HealthMonitorApp:
 
         # Populate Exercises
         for name, details in data.EXERCISES.items():
-            card = ttk.LabelFrame(scrollable_frame, text=f"{name} ({details['category']})", padding=10)
-            card.pack(fill=tk.X, pady=5, padx=5)
+            card = ttk.LabelFrame(scrollable_frame, text=f"{name} ({details['category']})", padding=15)
+            card.pack(fill=tk.X, pady=10, padx=5)
             
-            ttk.Label(card, text=details['desc'], wraplength=800).pack(anchor="w")
+            # Description
+            ttk.Label(card, text=details['desc'], wraplength=700, font=("Segoe UI", 10)).pack(side=tk.LEFT, padx=(0, 20))
+            
+            # Action Button
+            btn = ttk.Button(card, text="▶ Start", command=lambda n=name: self.launch_specific_exercise(n))
+            btn.pack(side=tk.RIGHT)
+
+    def launch_specific_exercise(self, name):
+        """Triggers the popup for a specific exercise."""
+        self.trigger_reminder(force_exercise=name)
 
     def setup_settings_tab(self):
-        container = ttk.Frame(self.tab_settings, padding=20)
+        container = ttk.Frame(self.tab_settings, padding=30)
         container.pack(fill=tk.BOTH, expand=True)
+        
+        # Center the settings
+        center_frame = ttk.Frame(container)
+        center_frame.pack(fill=tk.X)
 
         # Timer Settings
-        g1 = ttk.LabelFrame(container, text="Timer Configuration", padding=15)
+        g1 = ttk.LabelFrame(center_frame, text="⏱ Timer Configuration", padding=20)
         g1.pack(fill=tk.X, pady=10)
         
         ttk.Label(g1, text="Interval (minutes):").grid(row=0, column=0, padx=10, sticky="w")
         ttk.Entry(g1, textvariable=self.interval_minutes, width=5).grid(row=0, column=1, sticky="w")
 
         # Quiet Hours
-        g2 = ttk.LabelFrame(container, text="Quiet Hours (24h format HH:MM)", padding=15)
+        g2 = ttk.LabelFrame(center_frame, text="🌙 Quiet Hours (24h format HH:MM)", padding=20)
         g2.pack(fill=tk.X, pady=10)
 
         ttk.Label(g2, text="Start Quiet Time:").grid(row=0, column=0, padx=10, sticky="w")
@@ -206,7 +234,7 @@ class HealthMonitorApp:
         ttk.Entry(g2, textvariable=self.quiet_end, width=8).grid(row=1, column=1, sticky="w", pady=5)
 
         # Audio
-        g3 = ttk.LabelFrame(container, text="Audio Feedback", padding=15)
+        g3 = ttk.LabelFrame(center_frame, text="🔊 Audio Feedback", padding=20)
         g3.pack(fill=tk.X, pady=10)
         ttk.Checkbutton(g3, text="Enable Notification Sounds", variable=self.sound_enabled).pack(anchor="w")
 
@@ -268,6 +296,12 @@ class HealthMonitorApp:
         level, progress, needed = data.calculate_level(current_xp)
         self.current_level.set(level)
         self.xp_label.config(text=f"{progress} / {needed} XP")
+        
+        # Update Progress Bar
+        if hasattr(self, 'xp_progress'):
+             self.xp_progress['maximum'] = needed
+             self.xp_progress['value'] = progress
+        
         self.rank_title.set(data.get_rank_title(level))
 
         # 3. Calculate Streak
@@ -287,8 +321,8 @@ class HealthMonitorApp:
                         break
             elif sorted_dates[-1] == today - timedelta(days=1):
                 # Streak is still active if we stretched yesterday, just haven't done today yet
-                 streak = 1 # Actually, calculate full backwards logic similar to above
-                 # Simplified for brevity: if strict streak logic needed, expand here.
+                 streak = 1 
+                 # Logic for yesterday matches above if needed
                  pass
 
         self.streak.set(streak)
@@ -347,7 +381,7 @@ class HealthMonitorApp:
             try:
                 if self.interval_minutes.get() <= 0: raise ValueError
                 self.is_monitoring = True
-                self.start_btn.config(text="Disengage Monitor")
+                self.start_btn.config(text="⏹ Disengage Monitor")
                 self.status_label.config(text="● Systems Active", foreground=SUCCESS_COLOR)
                 
                 self.monitor_thread = threading.Thread(target=self.monitor_loop, daemon=True)
@@ -356,7 +390,7 @@ class HealthMonitorApp:
                 messagebox.showerror("Error", "Invalid interval settings.")
         else:
             self.is_monitoring = False
-            self.start_btn.config(text="Engage Monitor")
+            self.start_btn.config(text="▶ Engage Monitor")
             self.status_label.config(text="● Systems Offline", foreground=WARNING_COLOR)
 
     def is_quiet_time(self):
@@ -379,7 +413,7 @@ class HealthMonitorApp:
             if self.is_monitoring and not self.is_quiet_time():
                 self.root.after(0, self.trigger_reminder)
 
-    def trigger_reminder(self):
+    def trigger_reminder(self, force_exercise=None):
         # Sound
         if self.sound_enabled.get():
             try:
@@ -387,29 +421,39 @@ class HealthMonitorApp:
             except:
                 pass 
 
-        # Pick random exercise
-        ex_name, ex_data = random.choice(list(data.EXERCISES.items()))
+        if force_exercise:
+             ex_name = force_exercise
+             ex_data = data.EXERCISES[force_exercise]
+        else:
+            # Pick random exercise
+            ex_name, ex_data = random.choice(list(data.EXERCISES.items()))
+        
         quote = random.choice(data.MOTIVATIONAL_QUOTES)
 
         # Custom Popup Window
         popup = tk.Toplevel(self.root)
         popup.title("Incoming Transmission")
-        popup.geometry("400x250")
+        popup.geometry("450x300")
         popup.configure(bg=BG_COLOR)
         popup.attributes("-topmost", True)
+        
+        # Center popup
+        x = self.root.winfo_x() + (self.root.winfo_width() // 2) - 225
+        y = self.root.winfo_y() + (self.root.winfo_height() // 2) - 150
+        popup.geometry(f"+{x}+{y}")
 
-        ttk.Label(popup, text="⚠ GRAVITY ALERT ⚠", font=("Segoe UI", 12, "bold"), foreground=WARNING_COLOR, background=BG_COLOR).pack(pady=10)
+        ttk.Label(popup, text="⚠ GRAVITY ALERT ⚠", font=("Segoe UI", 14, "bold"), foreground=WARNING_COLOR, background=BG_COLOR).pack(pady=(20, 10))
         
-        ttk.Label(popup, text=f"Recommended Action: {ex_name}", font=("Segoe UI", 11, "bold"), foreground=ACCENT_COLOR, background=BG_COLOR).pack(pady=5)
-        ttk.Label(popup, text=ex_data['desc'], wraplength=350, justify="center", background=BG_COLOR, foreground=FG_COLOR).pack(pady=5)
+        ttk.Label(popup, text=f"Recommended Action: {ex_name}", font=("Segoe UI", 12, "bold"), foreground=ACCENT_COLOR, background=BG_COLOR).pack(pady=5)
+        ttk.Label(popup, text=ex_data['desc'], wraplength=380, justify="center", background=BG_COLOR, foreground=FG_COLOR, font=("Segoe UI", 10)).pack(pady=10)
         
-        ttk.Label(popup, text=f'"{quote}"', font=("Segoe UI", 9, "italic"), foreground=FG_COLOR, background=BG_COLOR).pack(pady=15)
+        ttk.Label(popup, text=f'"{quote}"', font=("Segoe UI", 9, "italic"), foreground=BUTTON_ACTIVE, background=BG_COLOR).pack(pady=15)
 
         def confirm():
             self.log_stretch()
             popup.destroy()
 
-        btn = ttk.Button(popup, text="Mission Complete (Log It)", command=confirm)
+        btn = ttk.Button(popup, text="✅ Mission Complete (Log It)", command=confirm)
         btn.pack(pady=10)
 
 

@@ -1,29 +1,32 @@
 # Project Icarus: The Antigravity Health Monitor
 
-![Version](https://img.shields.io/badge/version-2.0-blue.svg)
+![Version](https://img.shields.io/badge/version-2.1-blue.svg)
 ![Status](https://img.shields.io/badge/status-active-success.svg)
 
 > "Gravity is a habit that is hard to shake. Shake it anyway."
 
 **Project Icarus** is a Python-based health monitor designed for developers and desk workers. It reminds you to stretch, tracks your progress, and gamifies your health to keep you flying high.
 
-## 🚀 Features (v2.0)
+## 🚀 Features (v2.1)
 
 ### 🎮 Gamified Health
+*   **XP Progress Bar:** Visualize your journey to the next rank with a dynamic progress bar.
 *   **XP & Leveling System:** Earn XP for every stretch. Rank up from "Cadet" to "Galactic Legend".
-*   **Streak Tracking:** Keep your momentum going by stretching daily.
-*   **Pilot Profile:** Visual dashboard of your current rank and progress.
+*   **Streak Tracking:** Keep your momentum going with the daily 🔥 streak counter.
+*   **Pilot Profile:** A central hub showing your current rank, level, and experience.
 
-### 🧘 Smart Reminders
-*   **Variety:** Instead of a generic alert, Icarus suggests specific exercises (e.g., "Neck Release", "Wrist Flexor").
-*   **Quiet Hours:** Configure start and end times to prevent interruptions during sleep.
-*   **Audio Feedback:** Optional sound notifications when a reminder is triggered.
+### 🧘 Smart & Interactive Reminders
+*   **⚡ Quick Stretch:** Feeling stiff? Trigger a random stretch instantly with one click.
+*   **Interactive Library:** Launch specific exercises directly from the library whenever you need them.
+*   **Variety:** Popups suggest specific exercises (e.g., "Neck Release", "Wrist Flexor") with motivational quotes.
+*   **Quiet Hours:** Set "Do Not Disturb" times (e.g., 22:00 to 08:00) to keep your nights peaceful.
+*   **Audio Feedback:** Gentle chimes when a reminder is triggered (optional).
 
 ### 📊 Mission Control (Dashboard)
-*   **Dark Mode UI:** A sleek, Nord-theme inspired interface easy on the eyes.
-*   **Activity Charts:** Visual bar charts of your daily stretching habits.
-*   **Exercise Library:** Built-in reference guide for all recommended exercises.
-*   **Manual Logging:** Forgot to click the popup? Log stretches manually.
+*   **Modern UI/UX:** A sleek, Nord-theme inspired interface with intuitive icons and refined spacing.
+*   **Activity Charts:** High-contrast bar charts visualize your daily stretching habits.
+*   **Exercise Library:** A comprehensive reference guide for all recommended desk exercises.
+*   **Manual Logging:** Easily log stretches you did away from your desk.
 
 ## 🛠 Installation
 
@@ -46,17 +49,17 @@
     python dashboard.py
     ```
 2.  **Engage Systems:**
-    *   Click **"Engage Monitor"** to start the background timer (default: 30 mins).
-    *   The app will run in the background.
-    *   When the timer hits, a popup will appear with a recommended exercise.
+    *   Click **"▶ Engage Monitor"** to start the background timer.
+    *   The app runs in the background. When the timer hits, a popup appears.
+    *   Click **"✅ Mission Complete"** to log your progress and gain XP!
 3.  **Customize:**
-    *   Go to the **"Settings"** tab to adjust the interval, quiet hours, or toggle sound.
+    *   Go to the **"⚙ Settings"** tab to adjust intervals, quiet hours, or toggle sounds.
 
 ## 📂 File Structure
 
-*   `dashboard.py`: The main application entry point (GUI, Logic, Monitor).
-*   `icarus_data.py`: Data file containing exercise definitions, quotes, and XP logic.
-*   `stretch_log.csv`: Automatically generated log file storing your history.
+*   `dashboard.py`: The main "Mission Control" application (GUI & Monitor).
+*   `icarus_data.py`: Core logic for XP, levels, exercises, and motivational quotes.
+*   `stretch_log.csv`: Your personal mission log (History).
 *   `script.py`: (Legacy) Minimalist headless script for background monitoring.
 
 ## 🤝 Contributing
